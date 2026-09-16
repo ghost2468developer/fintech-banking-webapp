@@ -92,7 +92,7 @@ export function toTxView(t: TxWithRelations, meId: string): TxView {
       ? { name: t.counterparty, email: null }
       : { name: "Meridian Bank", email: null };
   } else {
-    // PURCHASE / BILL / DEBIT_ORDER — money out to a merchant or biller
+    // PURCHASE / BILL / DEBIT_ORDER money out to a merchant or biller
     direction = "out";
     party = t.counterparty ? { name: t.counterparty, email: null } : null;
     partyAccountId = t.fromAccountId;

@@ -44,7 +44,7 @@ const STEPS = [
     n: "02",
     label: "Find someone",
     title: "Any member, by account number",
-    body: "Every account gets a unique 16-digit number. Search by name, email, or the number itself — pick the person, pick their account, type the amount. The transfer settles instantly: row-locked, atomic, fee-free.",
+    body: "Every account gets a unique 16-digit number. Search by name, email, or the number itself, pick the person, pick their account, type the amount. The transfer settles instantly: row-locked, atomic, fee-free.",
   },
   {
     n: "03",
@@ -143,7 +143,7 @@ export default async function LandingPage() {
             <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-ink/65">
               Meridian is a bank built for the whole job: person-to-person
               transfers, buying from 12 partners, paying Eskom to Netflix, and
-              debit orders that run themselves — all on three account types and
+              debit orders that run themselves, all on three account types and
               an immutable, row-locked ledger behind every single line.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3.5">
@@ -245,7 +245,7 @@ export default async function LandingPage() {
             <Reveal key={s.n} delay={i * 120}>
               <div className="group border-t-2 border-ink/20 pt-6 transition-colors duration-300 hover:border-limedeep">
                 <p className="mono text-[11px] uppercase tracking-[0.22em] text-ink/45">
-                  Step {s.n} — {s.label}
+                  Step {s.n} - {s.label}
                 </p>
                 <h3 className="mt-3 font-display text-[22px] font-semibold tracking-tight">
                   {s.title}
@@ -269,7 +269,7 @@ export default async function LandingPage() {
             </h2>
           </Reveal>
           <div className="mt-12 grid gap-6 lg:grid-cols-12">
-            {/* checking — featured */}
+            {/* checking featured */}
             <Reveal className="lg:col-span-7">
               <div className="card card-hover flex h-full flex-col border-t-4 border-t-lime p-7">
                 <div className="flex items-center justify-between">
@@ -291,7 +291,7 @@ export default async function LandingPage() {
                 <dl className="mt-7 space-y-0 border-t border-ink/12 text-sm">
                   {[
                     ["Transfer fee", "R0.00, both directions"],
-                    ["Settlement", "Instant — median 42ms"],
+                    ["Settlement", "Instant - median 42ms"],
                     ["Minimum balance", "R0.00"],
                     ["Welcome credit", "R250, posted at signup"],
                   ].map(([k, v]) => (
@@ -324,7 +324,7 @@ export default async function LandingPage() {
                   </div>
                   <p className="mt-4 text-[15px] leading-relaxed text-ink/65">
                     Compounded daily. Park what you're not spending and pull it
-                    back with one tap — no lockups, no notice periods.
+                    back with one tap, no lockups, no notice periods.
                   </p>
                 </div>
               </Reveal>
@@ -344,7 +344,7 @@ export default async function LandingPage() {
                   </div>
                   <p className="mt-4 text-[15px] leading-relaxed text-ink/65">
                     Spend before payroll, settle on payday. The line is live the
-                    moment you open it — no underwriting queue.
+                    moment you open it, no underwriting queue.
                   </p>
                 </div>
               </Reveal>
@@ -373,7 +373,7 @@ export default async function LandingPage() {
                 "Row-level locking on both accounts before a single cent moves",
                 "bcrypt-hashed credentials, HMAC-signed 7-day sessions",
                 "Every movement carries a unique, immutable reference",
-                "One database transaction per transfer — all or nothing",
+                "One database transaction per transfer - all or nothing",
               ].map((li) => (
                 <li key={li} className="flex items-start gap-3 text-[15px] text-cream/80">
                   <IconCheck className="mt-1 size-4 shrink-0 text-lime" />
@@ -389,7 +389,7 @@ export default async function LandingPage() {
                 <span className="size-2.5 rounded-full bg-amber/70" />
                 <span className="size-2.5 rounded-full bg-lime/80" />
                 <span className="mono ml-3 text-[10px] uppercase tracking-[0.2em] text-cream/35">
-                  meridian — settlement
+                  meridian - settlement
                 </span>
               </div>
               <div className="mono space-y-2 text-[13px] leading-relaxed">
@@ -508,7 +508,7 @@ export default async function LandingPage() {
             </div>
           </div>
           <div className="mt-12 flex flex-col justify-between gap-3 border-t border-white/10 pt-6 text-[12px] md:flex-row">
-            <p>© 2026 Meridian Bank — a demonstration build.</p>
+            <p>© 2026 Meridian Bank - a demonstration build.</p>
             <p className="mono uppercase tracking-[0.16em] text-cream/35">
               Seeded with Postgres + Prisma
             </p>

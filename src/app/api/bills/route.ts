@@ -92,7 +92,7 @@ export async function POST(req: Request) {
     if (msg.startsWith("INSUFFICIENT")) {
       const avail = msg.split(":")[1];
       return jsonError(
-        `Insufficient funds — that account has R ${Number(avail).toLocaleString("en-US", { minimumFractionDigits: 2 })} available.`,
+        `Insufficient funds - that account has R ${Number(avail).toLocaleString("en-US", { minimumFractionDigits: 2 })} available.`,
         400
       );
     }

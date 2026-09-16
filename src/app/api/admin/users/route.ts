@@ -6,7 +6,7 @@ export const dynamic = "force-dynamic";
 
 /**
  * Admin directory: WHO is registered on the website.
- * Deliberately returns no balances or amounts — the admin sees members,
+ * Deliberately returns no balances or amounts, the admin sees members,
  * their account types and identifiers, and activity *timestamps* only.
  */
 export async function GET() {

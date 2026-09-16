@@ -111,7 +111,7 @@ export default function TransferForm({
       return;
     }
     if (!fromAccount) {
-      setError("Open an account first — you need somewhere to send from.");
+      setError("Open an account first - you need somewhere to send from.");
       return;
     }
     setSubmitting(true);
@@ -157,7 +157,7 @@ export default function TransferForm({
       setNote("");
       setRecipient(null);
     } catch {
-      setError("Network error — please try again.");
+      setError("Network error - please try again.");
     } finally {
       setSubmitting(false);
     }
@@ -394,7 +394,7 @@ export default function TransferForm({
         </p>
         {recentContacts.length === 0 ? (
           <p className="mt-4 text-sm text-ink/50">
-            No transfers yet — your contacts will appear here.
+            No transfers yet - your contacts will appear here.
           </p>
         ) : (
           <div className="mt-4 space-y-2">

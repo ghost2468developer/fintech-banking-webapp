@@ -62,7 +62,7 @@ export default function BuyPanel({
       setSelected(null);
       setCustomName("");
     } catch {
-      setError("Network error — please try again.");
+      setError("Network error - please try again.");
     } finally {
       setSubmitting(false);
     }
@@ -237,7 +237,7 @@ export default function BuyPanel({
                         : a.type === "SAVINGS"
                           ? "Savings"
                           : "Credit line"}{" "}
-                      · {maskNumber(a.number)} — {money(a.available)} available
+                      · {maskNumber(a.number)} - {money(a.available)} available
                     </option>
                   ))}
                 </select>
@@ -277,7 +277,7 @@ export default function BuyPanel({
             <IconCart className="size-8 text-ink/25" />
             <p className="mt-3 font-display text-lg">Pick a merchant</p>
             <p className="mt-1 max-w-[220px] text-sm text-ink/50">
-              Groceries, airtime, fashion, electronics — charged straight from
+              Groceries, airtime, fashion, electronics - charged straight from
               your Meridian account.
             </p>
           </div>

@@ -89,7 +89,7 @@ export default function Dashboard({ user }: { user: PublicUser }) {
       setTxns(tx?.transactions ?? []);
       setOrders(dos?.orders ?? []);
       if (dos && Array.isArray(dos.settled) && dos.settled.length > 0) {
-        // autopilot just settled due debit orders — resync everything
+        // autopilot just settled due debit orders - resync everything
         setSettled(dos.settled);
         Promise.all([
           fetch("/api/me").then((r) => (r.ok ? r.json() : null)),
@@ -124,7 +124,7 @@ export default function Dashboard({ user }: { user: PublicUser }) {
     [accounts]
   );
 
-  // NOTE: must stay above the early return below — hooks cannot follow
+  // NOTE: must stay above the early return below, hooks cannot follow
   // conditional returns (Rules of Hooks).
   const upcoming = useMemo(() => {
     const horizon = Date.now() + 21 * 86_400_000;
@@ -335,7 +335,7 @@ export default function Dashboard({ user }: { user: PublicUser }) {
               </span>
               <div className="min-w-0 flex-1">
                 <p className="text-[14px] font-semibold">
-                  Autopilot ran — {settled.length} debit order
+                  Autopilot ran - {settled.length} debit order
                   {settled.length > 1 ? "s" : ""} settled
                 </p>
                 <p className="mono mt-0.5 text-[11px] leading-relaxed text-ink/60">

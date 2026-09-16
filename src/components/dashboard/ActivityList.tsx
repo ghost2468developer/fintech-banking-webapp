@@ -134,7 +134,7 @@ export default function ActivityList({
       {shown.length === 0 ? (
         <EmptyState
           title="Nothing in this view"
-          body="Try a different filter — the movement is elsewhere in your ledger."
+          body="Try a different filter - the movement is elsewhere in your ledger."
         />
       ) : (
         <div>

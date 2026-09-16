@@ -179,7 +179,7 @@ export default function AdminConsole({ user }: { user: PublicUser }) {
           </div>
         )}
 
-        {/* stats (counts only — no money) */}
+        {/* stats (counts only no money) */}
         <div className="mt-7 grid grid-cols-2 gap-3.5 md:grid-cols-5">
           {STAT_CARDS.map((s) => (
             <div key={s.label} className="card p-4">
@@ -271,7 +271,7 @@ export default function AdminConsole({ user }: { user: PublicUser }) {
                     {filtered.length === 0 && (
                       <tr>
                         <td colSpan={5} className="py-8 text-center text-sm text-ink/50">
-                          {q ? `No members match “${q}”.` : "No members registered yet — sign-ups will appear here."}
+                          {q ? `No members match “${q}”.` : "No members registered yet - sign-ups will appear here."}
                         </td>
                       </tr>
                     )}
@@ -292,7 +292,7 @@ export default function AdminConsole({ user }: { user: PublicUser }) {
               </div>
               {recentSignups.length === 0 ? (
                 <p className="mt-3 py-4 text-sm text-ink/50">
-                  The directory is empty — registrations on the website land here.
+                  The directory is empty - registrations on the website land here.
                 </p>
               ) : (
                 <div className="mt-2 divide-y divide-dashed divide-ink/10">
@@ -395,7 +395,7 @@ export default function AdminConsole({ user }: { user: PublicUser }) {
                   </div>
 
                   <p className="mono mt-4 rounded-md border border-ink/10 bg-paper px-3 py-2 text-[10px] uppercase leading-relaxed tracking-[0.12em] text-ink/40">
-                    Balances &amp; line items are member-only — never visible
+                    Balances &amp; line items are member-only, never visible
                     to the administrator.
                   </p>
                 </div>

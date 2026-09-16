@@ -83,13 +83,13 @@ export default function DebitOrdersPanel({
       );
       setFlash(
         action === "pause"
-          ? `Paused — ${order.merchant} won't run until you resume it.`
+          ? `Paused - ${order.merchant} won't run until you resume it.`
           : action === "resume"
-            ? `Resumed — ${order.merchant} runs ${runDate(data.order.nextRun)}.`
+            ? `Resumed - ${order.merchant} runs ${runDate(data.order.nextRun)}.`
             : `Cancelled the ${order.merchant} mandate.`
       );
     } catch {
-      setError("Network error — please try again.");
+      setError("Network error - please try again.");
     }
   }
 
@@ -119,9 +119,9 @@ export default function DebitOrdersPanel({
       setShowForm(false);
       setAmount("");
       setCustomMerchant("");
-      setFlash(`Mandate accepted — ${name} ${money(data.order.amount)}${freqLabel(data.order.frequency)}.`);
+      setFlash(`Mandate accepted - ${name} ${money(data.order.amount)}${freqLabel(data.order.frequency)}.`);
     } catch {
-      setError("Network error — please try again.");
+      setError("Network error - please try again.");
     } finally {
       setCreating(false);
     }
@@ -176,7 +176,7 @@ export default function DebitOrdersPanel({
             <p className="mt-3 font-display text-lg">No mandates yet</p>
             <p className="mx-auto mt-1 max-w-[280px] text-sm text-ink/50">
               Accept a debit order and Meridian will settle it automatically
-              on schedule — Netflix, gyms, fibre, whatever you run.
+              on schedule - Netflix, gyms, fibre, whatever you run.
             </p>
           </div>
         ) : (
@@ -399,7 +399,7 @@ export default function DebitOrdersPanel({
             <ul className="mt-3 space-y-2.5 text-[13px] leading-relaxed text-ink/60">
               <li className="flex gap-2.5">
                 <span className="mono text-limedeep">01</span>
-                You accept a mandate — merchant, amount, schedule.
+                You accept a mandate - merchant, amount, schedule.
               </li>
               <li className="flex gap-2.5">
                 <span className="mono text-limedeep">02</span>

@@ -1,5 +1,5 @@
 /*
- * Meridian Bank — database seed.
+ * Meridian Bank - database seed.
  *  Run with:  npx prisma db seed
  *
  * ────────────────────────────────────────────────────────────────────────
@@ -13,7 +13,7 @@
  *  sessions, so anyone signed in must log in again.
  *
  *  The administrator (admin@meridian.com) is created separately, right
- *  below the array — it exists ONLY because this seed creates it.
+ *  below the array - it exists ONLY because this seed creates it.
  *  Registration in the app can never create an admin.
  * ────────────────────────────────────────────────────────────────────────
  */
@@ -24,7 +24,7 @@ import bcrypt from 'bcryptjs';
 const prisma = new PrismaClient();
 
 /* ════════════════════════════════════════════════════════════════════════
-   DEFAULT USERS — edit this block, then re-run `npx prisma db seed`
+   DEFAULT USERS - edit this block, then re-run `npx prisma db seed`
    ════════════════════════════════════════════════════════════════════════ */
 
 export interface MandateSpec {
@@ -57,7 +57,7 @@ export interface SeedUserSpec {
 }
 
 /*
- * By default this is EMPTY — the seed creates ONLY the administrator.
+ * By default this is EMPTY, the seed creates ONLY the administrator.
  * Everyone else is expected to register through the website, and the
  * admin console will show exactly who has signed up.
  *
@@ -242,7 +242,7 @@ async function main() {
   const now = Date.now();
   const daysAgo = (d: number, h = 0) => new Date(now - d * 86400000 - h * 3600000);
 
-  /* ----- admin (created ONLY by this seed — never by the app) ----- */
+  /* ----- admin (created ONLY by this seed, never by the app) ----- */
   const admin = await makeUser('Avery Sterling', 'admin@meridian.com', 'admin1234', Role.ADMIN, daysAgo(120));
   const adminChecking = await makeAccount(admin.id, AccountType.CHECKING, daysAgo(120));
   const adminSavings = await makeAccount(admin.id, AccountType.SAVINGS, daysAgo(119));
@@ -278,7 +278,7 @@ async function main() {
     const depositTarget = checkingId ?? firstId;
     await transfer(admin.id, adminChecking.id, u.id, depositTarget, deposit, 'Opening deposit', daysAgo(spec.ageDays - 1));
 
-    // mandates — deduct from checking when available, else the first account
+    // mandates, deduct from checking when available, else the first account
     for (const m of spec.mandates ?? []) {
       const fromAccountId = checkingId ?? firstId;
       await prisma.debitOrder.create({
@@ -344,7 +344,7 @@ async function main() {
       console.log(`    ${s.email.padEnd(24)} /  ${s.password}`);
     }
   } else {
-    console.log('  No default users — everyone else registers on the website.');
+    console.log('  No default users, everyone else registers on the website.');
   }
   console.log('');
   console.log('  Tip: add default users via the SEED_USERS block at the top of');

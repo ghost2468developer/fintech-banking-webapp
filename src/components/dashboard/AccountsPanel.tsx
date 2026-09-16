@@ -135,7 +135,7 @@ export default function AccountsPanel({
       onOpened(data.account);
       flashMsg(`${ACCOUNT_META[chosen].label} account opened`);
     } catch {
-      setError("Network error — please try again.");
+      setError("Network error - please try again.");
     } finally {
       setOpening(false);
     }
@@ -170,7 +170,7 @@ export default function AccountsPanel({
       setDepAmount("");
       setDepNote("");
     } catch {
-      setDepError("Network error — please try again.");
+      setDepError("Network error - please try again.");
     } finally {
       setDepositing(false);
     }
@@ -266,7 +266,7 @@ export default function AccountsPanel({
             {depDone && (
               <p className="flex items-center gap-2 rounded-md border border-limedeep/50 bg-lime/30 px-3 py-2 text-[13px] font-medium">
                 <IconCheck className="size-4 shrink-0 text-limedeep" />
-                Deposit posted — ref {depDone}
+                Deposit posted - ref {depDone}
               </p>
             )}
             {depError && <ErrorNote>{depError}</ErrorNote>}

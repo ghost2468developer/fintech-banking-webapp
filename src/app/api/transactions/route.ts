@@ -62,7 +62,7 @@ export async function POST(req: Request) {
     if (!to) return jsonError("Recipient account not found.", 404);
     if (to.userId === user.id)
       return jsonError(
-        "You can't transfer to yourself — that's a sweep between your own accounts.",
+        "You can't transfer to yourself - that's a sweep between your own accounts.",
         400
       );
 
@@ -126,7 +126,7 @@ export async function POST(req: Request) {
     if (msg.startsWith("INSUFFICIENT")) {
       const avail = msg.split(":")[1];
       return jsonError(
-        `Insufficient funds — that account has ${money(Number(avail))} available.`,
+        `Insufficient funds - that account has ${money(Number(avail))} available.`,
         400
       );
     }

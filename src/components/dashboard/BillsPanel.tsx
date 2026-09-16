@@ -87,7 +87,7 @@ export default function BillsPanel({
       setPayer(null);
       setAmount("");
     } catch {
-      setError("Network error — please try again.");
+      setError("Network error - please try again.");
     } finally {
       setSubmitting(false);
     }
@@ -109,7 +109,7 @@ export default function BillsPanel({
             </span>
             <div className="min-w-0 flex-1">
               <p className="text-[14px] font-semibold">
-                Paid {success.name} — {money(success.amount)}
+                Paid {success.name} = {money(success.amount)}
               </p>
               <p className="mono mt-0.5 text-[11px] text-ink/55">
                 ref {success.reference} · biller statement updated
@@ -285,7 +285,7 @@ export default function BillsPanel({
                         : a.type === "SAVINGS"
                           ? "Savings"
                           : "Credit line"}{" "}
-                      · {maskNumber(a.number)} — {money(a.available)} available
+                      · {maskNumber(a.number)} - {money(a.available)} available
                     </option>
                   ))}
                 </select>
@@ -314,7 +314,7 @@ export default function BillsPanel({
             <IconReceipt className="size-8 text-ink/25" />
             <p className="mt-3 font-display text-lg">Select a biller</p>
             <p className="mt-1 max-w-[220px] text-sm text-ink/50">
-              Eskom to Netflix — pick a bill from the list and it clears in
+              Eskom to Netflix - pick a bill from the list and it clears in
               seconds.
             </p>
           </div>

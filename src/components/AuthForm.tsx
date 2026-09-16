@@ -46,7 +46,7 @@ export default function AuthForm({
       }
       window.location.href = "/app";
     } catch {
-      setError("Network error — please try again.");
+      setError("Network error - please try again.");
     } finally {
       setLoading(false);
     }
@@ -80,7 +80,7 @@ export default function AuthForm({
             So is <span className="text-lime">kindness</span>.”
           </p>
           <p className="mono mt-4 text-[11px] uppercase tracking-[0.2em] text-cream/40">
-            — the founding memo, 2026
+            - the founding memo, 2026
           </p>
         </div>
         <div className="relative mono space-y-1.5 text-[12px] text-cream/40">

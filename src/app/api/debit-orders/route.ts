@@ -36,7 +36,7 @@ function toView(o: {
 
 /**
  * List the user's debit orders. Any ACTIVE order whose nextRun is due
- * is settled on the spot (row-locked, atomically) — the same way a real
+ * is settled on the spot (row-locked, atomically) the same way a real
  * debit-order run would hit the ledger.
  */
 export async function GET() {
@@ -90,7 +90,7 @@ export async function GET() {
             nextRun: next,
           });
         } else {
-          // Could not afford this cycle — advance the schedule (real banks
+          // Could not afford this cycle advance the schedule (real banks
           // may try once more and then fail the mandate; here we skip it).
           await tx.debitOrder.update({
             where: { id: d.id },

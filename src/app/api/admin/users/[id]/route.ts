@@ -6,7 +6,7 @@ export const dynamic = "force-dynamic";
 
 /**
  * One registered member's profile for the admin: identity, account
- * identifiers and counts — never balances or line-item amounts.
+ * identifiers and counts, never balances or line-item amounts.
  */
 export async function GET(
   _req: Request,

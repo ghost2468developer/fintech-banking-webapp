@@ -2,7 +2,7 @@
 
 Precision banking for people who count. Meridian is a full banking application:
 person-to-person transfers, three account types, merchant purchases, bill
-payments, autopilot debit orders — all settled on an immutable, row-locked
+payments, autopilot debit orders-all settled on an immutable, row-locked
 ledger in PostgreSQL.
 
 Currency is **South African Rand (ZAR)**.
@@ -15,19 +15,19 @@ Currency is **South African Rand (ZAR)**.
 ## Features
 
 ### Money movement
-- **Person-to-person transfers** — find the recipient by **name, email, or
+- **Person-to-person transfers**-find the recipient by **name, email, or
   their unique 16-digit account number** (every account card shows its full
   number with copy-to-clipboard, which is how members share it), pick their
   account, send. Instant, fee-free, settled atomically.
-- **Deposits** — insert money into any of your accounts from an external
+- **Deposits**-insert money into any of your accounts from an external
   bank; credited instantly and posted to the ledger with a reference.
-- **Buy from 12 partner merchants** — Makro, Checkers, Takealot, Game,
+- **Buy from 12 partner merchants**-Makro, Checkers, Takealot, Game,
   Dis-Chem and more, including **Vodacom / MTN airtime & data** (credited
   instantly). Any custom store name works too.
-- **Pay bills** — registered billers with biller codes and due dates
+- **Pay bills**-registered billers with biller codes and due dates
   (Eskom, City of Cape Town, Netflix, Boxer Fibre, FNB Home Loan…), plus a
   custom-biller form for anything else.
-- **Debit orders (autopilot)** — mandate any merchant at a weekly or monthly
+- **Debit orders (autopilot)**-mandate any merchant at a weekly or monthly
   cadence. Due mandates **settle automatically** against your account with a
   row-level lock, post a referenced ledger entry, and advance the schedule.
   Pause, resume, or cancel any mandate before its run date.
@@ -37,23 +37,23 @@ Currency is **South African Rand (ZAR)**.
 |---|---|
 | **Checking** | Everyday money. Instant transfers, R0 fees. |
 | **Savings** | 3.20% APY, compounded daily (displayed, not yet accrual-settled). |
-| **Credit line** | R5,000 instant line — balance can go negative down to the limit; usage is shown as a bar. |
+| **Credit line** | R5,000 instant line-balance can go negative down to the limit; usage is shown as a bar. |
 
 Members hold one of each type, up to four accounts total. New members choose
 their starting account at signup and receive a **R250 welcome credit** posted
 to the ledger immediately.
 
 ### Roles
-- **Customer** — full member experience: dashboard, transfers, buy, bills,
+- **Customer**-full member experience: dashboard, transfers, buy, bills,
   debit orders, accounts, activity.
-- **Administrator** — everything a customer has (admins bank from their own
+- **Administrator**-everything a customer has (admins bank from their own
   treasury accounts) **plus** the Admin Console: the directory of everyone
-  registered on the website — names, emails, roles, account types and
-  account numbers, join dates, last activity — **with no balances or amounts
+  registered on the website-names, emails, roles, account types and
+  account numbers, join dates, last activity-**with no balances or amounts
   anywhere** (money data is member-only by design).
 
 > **The administrator can only be created by the database seed.**
-> The registration endpoint hardcodes `role: "CUSTOMER"` — there is no code
+> The registration endpoint hardcodes `role: "CUSTOMER"`-there is no code
 > path that can mint an admin.
 
 ---
@@ -65,7 +65,7 @@ to the ledger immediately.
 | Framework | Next.js (App Router) + React 19 |
 | Database | PostgreSQL |
 | ORM | **Prisma** (client generated via `prisma-client-js`) |
-| Auth | Custom — `bcryptjs` password hashing + `jose` HS256 JWTs in an httpOnly cookie (7-day sessions) |
+| Auth | Custom-`bcryptjs` password hashing + `jose` HS256 JWTs in an httpOnly cookie (7-day sessions) |
 | Styling | Tailwind CSS v4, custom theme (Fraunces / Instrument Sans / IBM Plex Mono) |
 | Currency | ZAR via `Intl.NumberFormat` (narrow "R" symbol) |
 
@@ -109,7 +109,7 @@ npx prisma db seed
 
 Seeding is configured in `prisma.config.ts` (`migrations.seed`) and is the
 **only way the administrator account exists**. By default the seed creates
-**only the admin** (Meridian Treasury, ~R1.96M across two accounts) — every
+**only the admin** (Meridian Treasury, ~R1.96M across two accounts)-every
 other member is expected to **register through the website**, which is
 exactly who the admin console then shows.
 
@@ -120,13 +120,13 @@ see "Creating your own default users" below.
 Reseeding wipes and rebuilds all data (and invalidates existing sessions).
 
 > Prefer an `npm run seed` shortcut? Add
-> `"scripts": { "seed": "prisma db seed" }` to `package.json` — the
+> `"scripts": { "seed": "prisma db seed" }` to `package.json`-the
 > behaviour is identical to `npx prisma db seed`.
 
 ### Creating your own default users
 
 All default users live in one declarative block at the top of
-[`prisma/seed.ts`](prisma/seed.ts) — edit it and reseed:
+[`prisma/seed.ts`](prisma/seed.ts)-edit it and reseed:
 
 ```ts
 const SEED_USERS: SeedUserSpec[] = [
@@ -165,11 +165,11 @@ npx prisma db seed
 
 Notes:
 
-- **Wipe semantics** — reseeding deletes and rebuilds *everything*, including
+- **Wipe semantics**-reseeding deletes and rebuilds *everything*, including
   any accounts registered through the app. Existing sessions stop working.
-- **Admins** — the admin is created outside `SEED_USERS` and always exists
+- **Admins**-the admin is created outside `SEED_USERS` and always exists
   after a seed; the app itself can never create one.
-- **Emails** must be unique (Postgres unique constraint) — duplicate emails
+- **Emails** must be unique (Postgres unique constraint)-duplicate emails
   will fail the seed.
 
 ### 5. Run
@@ -183,14 +183,14 @@ npm run build && npm start   # production
 
 Prisma generates a **per-machine, per-OS client** inside `node_modules`
 (`.prisma/client`) plus platform-specific query-engine binaries. None of
-that transfers with a zip download or a `git clone` — you must generate it
+that transfers with a zip download or a `git clone`-you must generate it
 on the machine that will run the app:
 
 ```bash
 # 1. Don't reuse a node_modules copied from another OS
 rm -rf node_modules .next        # Windows: rmdir /s /q node_modules .next
 
-# 2. Install — postinstall runs `prisma generate` automatically
+# 2. Install-postinstall runs `prisma generate` automatically
 npm install
 npx prisma generate              # run explicitly anyway; it's idempotent
 
@@ -221,7 +221,7 @@ npm run dev
 | Weird errors after upgrading deps or merging changes | Stale Turbopack/webpack cache | Delete `.next` and restart `npm run dev` |
 | Seeding succeeds but the app shows stale/old data | You're not pointing at the database you seeded | Confirm the same `DATABASE_URL` is loaded (`.env` at project root) |
 
-> **Note on `npm run dev` vs `next dev --webpack`** — either works. Next 16
+> **Note on `npm run dev` vs `next dev --webpack`**-either works. Next 16
 > defaults to the Turbopack dev server; `--webpack` is the classic
 > alternative. Nothing in this app is bundler-specific.
 
@@ -234,7 +234,7 @@ npm run dev
 | **Administrator** | `admin@meridian.com` | `admin1234` | seed (the only account the seed creates) |
 | Customer | *(you pick it)* | *(you pick it)* | register on the website |
 
-Customers sign themselves up at `/register` — that registration is what
+Customers sign themselves up at `/register`-that registration is what
 populates the admin's member directory. Default users can be added to the
 seed via the `SEED_USERS` block if you want them.
 
@@ -250,7 +250,7 @@ follows the same pattern:
    (multi-account transfers lock both rows in id order to avoid deadlocks).
 2. Available funds are re-read **under the lock**
    (`balance + creditLimit`) and validated.
-3. Balances are adjusted and the transaction is written — all inside one
+3. Balances are adjusted and the transaction is written-all inside one
    Prisma interactive transaction (`$transaction`), so it is all-or-nothing.
 4. Each entry gets a unique immutable reference (`MDB-XXXXXX-XX`).
 
@@ -266,7 +266,7 @@ balances.
 
 ### Authentication
 - Login/register hash passwords with bcrypt (10 rounds) and sign an HS256 JWT
-  (`jose`) carrying `sub`, `role`, `email` — 7-day expiry.
+  (`jose`) carrying `sub`, `role`, `email`-7-day expiry.
 - The JWT lives in an `httpOnly`, `SameSite=Lax` cookie (`meridian_session`).
 - Server components gate `/app` (any user) and `/admin` (ADMIN only); every
   API route re-verifies the session, and admin routes re-check the role.
@@ -279,9 +279,9 @@ All routes return JSON. Auth routes set/clear the session cookie.
 
 | Method | Route | Auth | Description |
 |---|---|---|---|
-| POST | `/api/auth/register` | — | Create a **customer** account + starting account + R250 welcome credit. Sets session. |
-| POST | `/api/auth/login` | — | Verify credentials. Sets session. |
-| POST | `/api/auth/logout` | — | Clears session. |
+| POST | `/api/auth/register` |-| Create a **customer** account + starting account + R250 welcome credit. Sets session. |
+| POST | `/api/auth/login` |-| Verify credentials. Sets session. |
+| POST | `/api/auth/logout` |-| Clears session. |
 | GET | `/api/me` | user | Current user + accounts. |
 | POST | `/api/accounts` | user | Open a new account (one per type, max 4). |
 | GET | `/api/transactions` | user | Current user's ledger (last 80), with direction & counterparty. |
@@ -294,8 +294,8 @@ All routes return JSON. Auth routes set/clear the session cookie.
 | POST | `/api/debit-orders` | user | Create a mandate (merchant, amount, WEEKLY/MONTHLY, first run, source account). |
 | PATCH | `/api/debit-orders/:id` | user | `{ action: "pause" \| "resume" \| "cancel" }`. |
 | GET | `/api/admin/users` | **admin** | All registered users (identity + account identifiers, **no balances**), registration/ledger counts. |
-| GET | `/api/admin/users/:id` | **admin** | One user's profile (accounts by number, counts — no amounts). |
-| GET | `/api/health` | — | Liveness probe. |
+| GET | `/api/admin/users/:id` | **admin** | One user's profile (accounts by number, counts-no amounts). |
+| GET | `/api/health` |-| Liveness probe. |
 
 Transaction kinds: `TRANSFER`, `CREDIT`, `PURCHASE`, `BILL`, `DEBIT_ORDER`.
 

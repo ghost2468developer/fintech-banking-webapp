@@ -21,7 +21,7 @@ const plex = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Meridian Bank — Precision banking",
+  title: "Meridian Bank - Precision banking",
   description:
     "Person-to-person transfers, three account types, and an immutable ledger behind every line.",
 };

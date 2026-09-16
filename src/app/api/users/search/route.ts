@@ -16,7 +16,7 @@ export async function GET(req: Request) {
     { name: { contains: q, mode: "insensitive" } },
     { email: { contains: q, mode: "insensitive" } },
   ];
-  // Account numbers are the canonical way to find someone — match on
+  // Account numbers are the canonical way to find someone match on
   // digits (spaces stripped, so pasted "5388 2773…" and raw digits both work).
   const qDigits = q.replace(/\D/g, "");
   if (qDigits.length >= 4) {

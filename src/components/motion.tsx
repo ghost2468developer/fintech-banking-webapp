@@ -212,7 +212,7 @@ export type FeedRow = {
   sign: 1 | -1;
 };
 
-/** Self-cycling ledger feed — a new entry slides in every few seconds. */
+/** Self-cycling ledger feed, a new entry slides in every few seconds. */
 export function LedgerFeed({
   rows,
   className = "",
