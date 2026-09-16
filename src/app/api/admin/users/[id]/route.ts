@@ -1,9 +1,13 @@
 import { prisma } from "@/lib/prisma";
 import { getSessionUser } from "@/lib/auth";
-import { jsonError, toTxView } from "@/lib/api";
+import { jsonError } from "@/lib/api";
 
 export const dynamic = "force-dynamic";
 
+/**
+ * One registered member's profile for the admin: identity, account
+ * identifiers and counts — never balances or line-item amounts.
+ */
 export async function GET(
   _req: Request,
   ctx: { params: Promise<{ id: string }> }
@@ -17,21 +21,15 @@ export async function GET(
 
   const user = await prisma.user.findUnique({
     where: { id },
-    include: { accounts: true },
+    include: {
+      accounts: { select: { id: true, type: true, number: true } },
+    },
   });
   if (!user) return jsonError("User not found.", 404);
 
-  const [txns, last] = await Promise.all([
-    prisma.transaction.findMany({
+  const [ledgerEntries, last] = await Promise.all([
+    prisma.transaction.count({
       where: { OR: [{ senderId: id }, { receiverId: id }] },
-      take: 15,
-      orderBy: { createdAt: "desc" },
-      include: {
-        sender: { select: { name: true, email: true } },
-        receiver: { select: { name: true, email: true } },
-        fromAccount: { select: { type: true } },
-        toAccount: { select: { type: true } },
-      },
     }),
     prisma.transaction.findFirst({
       where: { OR: [{ senderId: id }, { receiverId: id }] },
@@ -48,17 +46,12 @@ export async function GET(
       role: user.role,
       createdAt: user.createdAt,
       lastActivity: last?.createdAt ?? null,
-      totalBalance: Number(
-        user.accounts.reduce((s, a) => s + Number(a.balance), 0)
-      ),
       accounts: user.accounts.map((a) => ({
         id: a.id,
         type: a.type,
         number: a.number,
-        balance: Number(a.balance),
-        creditLimit: Number(a.creditLimit),
       })),
     },
-    transactions: txns.map((t) => toTxView(t, id)),
+    ledgerEntries,
   });
 }

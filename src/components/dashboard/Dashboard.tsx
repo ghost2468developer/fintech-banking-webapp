@@ -536,6 +536,7 @@ export default function Dashboard({ user }: { user: PublicUser }) {
               onOpened={(acc) =>
                 setAccounts((prev) => [...(prev ?? []), acc])
               }
+              onSettled={handleSettled}
             />
           )}
 

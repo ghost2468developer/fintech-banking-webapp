@@ -237,32 +237,21 @@ export default function AuthForm({
           {isLogin && (
             <div className="mt-8 rounded-lg border border-ink/15 bg-cream p-4">
               <p className="mono text-[10px] uppercase tracking-[0.2em] text-ink/45">
-                Seeded demo logins
+                Seeded administrator (the only account `npm seed` creates)
               </p>
-              <div className="mt-3 grid gap-2 sm:grid-cols-2">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setEmail("admin@meridian.com");
-                    setPassword("admin1234");
-                  }}
-                  className="rounded-md border border-ink/20 bg-white px-3 py-2 text-left text-[12px] transition-colors hover:border-ink"
-                >
-                  <span className="block font-semibold">Administrator</span>
-                  <span className="mono text-ink/50">admin@meridian.com</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setEmail("amara@demo.com");
-                    setPassword("demo1234");
-                  }}
-                  className="rounded-md border border-ink/20 bg-white px-3 py-2 text-left text-[12px] transition-colors hover:border-ink"
-                >
-                  <span className="block font-semibold">Customer</span>
-                  <span className="mono text-ink/50">amara@demo.com</span>
-                </button>
-              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  setEmail("admin@meridian.com");
+                  setPassword("admin1234");
+                }}
+                className="mt-3 w-full rounded-md border border-ink/20 bg-white px-3 py-2 text-left text-[12px] transition-colors hover:border-ink"
+              >
+                <span className="block font-semibold">Administrator</span>
+                <span className="mono text-ink/50">
+                  admin@meridian.com / admin1234
+                </span>
+              </button>
             </div>
           )}
         </div>

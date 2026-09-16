@@ -12,13 +12,21 @@ export async function GET(req: Request) {
   const q = (url.searchParams.get("q") ?? "").trim();
   if (q.length < 2) return Response.json({ results: [] });
 
+  const conditions: Record<string, unknown>[] = [
+    { name: { contains: q, mode: "insensitive" } },
+    { email: { contains: q, mode: "insensitive" } },
+  ];
+  // Account numbers are the canonical way to find someone — match on
+  // digits (spaces stripped, so pasted "5388 2773…" and raw digits both work).
+  const qDigits = q.replace(/\D/g, "");
+  if (qDigits.length >= 4) {
+    conditions.push({ accounts: { some: { number: { contains: qDigits } } } });
+  }
+
   const results = await prisma.user.findMany({
     where: {
       id: { not: user.id },
-      OR: [
-        { name: { contains: q, mode: "insensitive" } },
-        { email: { contains: q, mode: "insensitive" } },
-      ],
+      OR: conditions,
     },
     include: {
       accounts: {
@@ -43,3 +51,4 @@ export async function GET(req: Request) {
     })),
   });
 }
+

@@ -12,10 +12,16 @@ export const CREDIT_LIMITS: Record<AccountType, number> = {
 
 const REF_CHARS = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
 
+/** Unique 16-digit account number, stored WITHOUT spaces (searchable). */
 export function newAccountNumber(): string {
   let s = "";
   for (let i = 0; i < 16; i++) s += Math.floor(Math.random() * 10);
-  return s.replace(/(\d{4})(?=\d)/g, "$1 ");
+  return s;
+}
+
+/** Display form: "5388 2773 6217 4934" */
+export function formatAccountNumber(n: string): string {
+  return n.replace(/\D/g, "").replace(/(\d{4})(?=\d)/g, "$1 ");
 }
 
 export function newReference(): string {

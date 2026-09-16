@@ -15,8 +15,12 @@ Currency is **South African Rand (ZAR)**.
 ## Features
 
 ### Money movement
-- **Person-to-person transfers** — search members by name or email, pick
-  *their* account, send. Instant, fee-free, settled atomically.
+- **Person-to-person transfers** — find the recipient by **name, email, or
+  their unique 16-digit account number** (every account card shows its full
+  number with copy-to-clipboard, which is how members share it), pick their
+  account, send. Instant, fee-free, settled atomically.
+- **Deposits** — insert money into any of your accounts from an external
+  bank; credited instantly and posted to the ledger with a reference.
 - **Buy from 12 partner merchants** — Makro, Checkers, Takealot, Game,
   Dis-Chem and more, including **Vodacom / MTN airtime & data** (credited
   instantly). Any custom store name works too.
@@ -43,9 +47,10 @@ to the ledger immediately.
 - **Customer** — full member experience: dashboard, transfers, buy, bills,
   debit orders, accounts, activity.
 - **Administrator** — everything a customer has (admins bank from their own
-  treasury accounts) **plus** the Admin Console: every registered user, all
-  their accounts and balances, last activity, a per-user ledger drill-down,
-  and a live "latest system movements" feed.
+  treasury accounts) **plus** the Admin Console: the directory of everyone
+  registered on the website — names, emails, roles, account types and
+  account numbers, join dates, last activity — **with no balances or amounts
+  anywhere** (money data is member-only by design).
 
 > **The administrator can only be created by the database seed.**
 > The registration endpoint hardcodes `role: "CUSTOMER"` — there is no code
@@ -103,13 +108,14 @@ npx prisma db seed
 ```
 
 Seeding is configured in `prisma.config.ts` (`migrations.seed`) and is the
-**only way the administrator account exists**. The seed creates:
+**only way the administrator account exists**. By default the seed creates
+**only the admin** (Meridian Treasury, ~R1.96M across two accounts) — every
+other member is expected to **register through the website**, which is
+exactly who the admin console then shows.
 
-- 1 admin (Meridian Treasury, ~R1.96M across two accounts)
-- 7 default customers defined in the `SEED_USERS` block of `prisma/seed.ts`
-- ~60 historical ledger entries (transfers, opening deposits, welcome credits)
-- 9 debit-order mandates — **one of Amara's is already overdue**, so the
-  first time she logs in, autopilot settles it live
+Optional: the `SEED_USERS` block in `prisma/seed.ts` (empty by default) can
+bake in default users with accounts, opening deposits and debit orders —
+see "Creating your own default users" below.
 
 Reseeding wipes and rebuilds all data (and invalidates existing sessions).
 
@@ -173,24 +179,64 @@ npm run dev      # development
 npm run build && npm start   # production
 ```
 
+### Running on your own machine (fresh clone / downloaded copy)
+
+Prisma generates a **per-machine, per-OS client** inside `node_modules`
+(`.prisma/client`) plus platform-specific query-engine binaries. None of
+that transfers with a zip download or a `git clone` — you must generate it
+on the machine that will run the app:
+
+```bash
+# 1. Don't reuse a node_modules copied from another OS
+rm -rf node_modules .next        # Windows: rmdir /s /q node_modules .next
+
+# 2. Install — postinstall runs `prisma generate` automatically
+npm install
+npx prisma generate              # run explicitly anyway; it's idempotent
+
+# 3. Point .env at YOUR Postgres and make sure it's running
+#    On Windows the default Postgres password is whatever you set at
+#    install time, not postgres/postgres:
+#    DATABASE_URL="postgresql://postgres:YOUR_PASSWORD@localhost:5432/app_db"
+#    Create the database if it doesn't exist:  CREATE DATABASE app_db;
+
+# 4. Tables, then data (seed creates the only admin)
+npx prisma db push
+npx prisma db seed
+
+# 5. Go
+npm run dev
+```
+
+### Troubleshooting
+
+| Symptom | Cause | Fix |
+|---|---|---|
+| `@prisma/client did not initialize yet. Please run "prisma generate"…` | Client not generated in *this* machine's `node_modules` (fresh install, or `node_modules` copied from another OS) | Delete `node_modules` + `.next`, then `npm install` and `npx prisma generate` |
+| `P1001: Can't reach database server` | Postgres not running, or wrong `DATABASE_URL` | Start Postgres; check host/port/user/password/db in `.env` |
+| `P2021: Table "public.users" does not exist` | Schema never pushed to this database | `npx prisma db push` |
+| `P2002` or `P2025` right after a push | Database URL points at an empty/fresh DB | Push again, then `npx prisma db seed` |
+| App boots but there are no users / every login fails | Database not seeded | `npx prisma db seed` (creates admin + demo users) |
+| Port 3000 refused / taken | Another dev server is running | Kill it, or `next dev -p 3001` |
+| Weird errors after upgrading deps or merging changes | Stale Turbopack/webpack cache | Delete `.next` and restart `npm run dev` |
+| Seeding succeeds but the app shows stale/old data | You're not pointing at the database you seeded | Confirm the same `DATABASE_URL` is loaded (`.env` at project root) |
+
+> **Note on `npm run dev` vs `next dev --webpack`** — either works. Next 16
+> defaults to the Turbopack dev server; `--webpack` is the classic
+> alternative. Nothing in this app is bundler-specific.
+
 ---
 
-## Demo logins
+## Logins
 
-| Role | Email | Password |
-|---|---|---|
-| **Administrator** (seed-only) | `admin@meridian.com` | `admin1234` |
-| Customer | `amara@demo.com` | `demo1234` |
-| Customer | `jonas@demo.com` | `demo1234` |
-| Customer | `priya@demo.com` | `demo1234` |
-| Customer | `diego@demo.com` | `demo1234` |
-| Customer | `grace@demo.com` | `demo1234` |
-| Customer | `tom@demo.com` | `demo1234` |
-| Customer | `lena@demo.com` | `demo1234` |
+| Role | Email | Password | Source |
+|---|---|---|---|
+| **Administrator** | `admin@meridian.com` | `admin1234` | seed (the only account the seed creates) |
+| Customer | *(you pick it)* | *(you pick it)* | register on the website |
 
-Sign in as **Amara** to see the autopilot banner (her overdue Netflix mandate
-settles on first load), or as the **admin** to watch every movement on the
-system.
+Customers sign themselves up at `/register` — that registration is what
+populates the admin's member directory. Default users can be added to the
+seed via the `SEED_USERS` block if you want them.
 
 ---
 
@@ -240,14 +286,15 @@ All routes return JSON. Auth routes set/clear the session cookie.
 | POST | `/api/accounts` | user | Open a new account (one per type, max 4). |
 | GET | `/api/transactions` | user | Current user's ledger (last 80), with direction & counterparty. |
 | POST | `/api/transactions` | user | Person-to-person transfer (row-locked, atomic). |
-| GET | `/api/users/search?q=` | user | Search members by name/email (excludes self), with their accounts. |
+| POST | `/api/deposit` | user | Deposit into one of your own accounts (CREDIT entry + reference). |
+| GET | `/api/users/search?q=` | user | Search members by **name, email, or account number** (excludes self), with their accounts. |
 | POST | `/api/purchase` | user | Buy from a merchant (partner or custom). |
 | POST | `/api/bills` | user | Pay a biller (preset or custom, with biller code). |
 | GET | `/api/debit-orders` | user | List mandates; **settles any due runs first** (autopilot). |
 | POST | `/api/debit-orders` | user | Create a mandate (merchant, amount, WEEKLY/MONTHLY, first run, source account). |
 | PATCH | `/api/debit-orders/:id` | user | `{ action: "pause" \| "resume" \| "cancel" }`. |
-| GET | `/api/admin/users` | **admin** | All users + accounts + balances, system stats, latest movements. |
-| GET | `/api/admin/users/:id` | **admin** | One user's accounts and last 15 ledger entries. |
+| GET | `/api/admin/users` | **admin** | All registered users (identity + account identifiers, **no balances**), registration/ledger counts. |
+| GET | `/api/admin/users/:id` | **admin** | One user's profile (accounts by number, counts — no amounts). |
 | GET | `/api/health` | — | Liveness probe. |
 
 Transaction kinds: `TRANSFER`, `CREDIT`, `PURCHASE`, `BILL`, `DEBIT_ORDER`.

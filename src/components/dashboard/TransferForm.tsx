@@ -194,7 +194,7 @@ export default function TransferForm({
       <form onSubmit={submit} className="card p-6 lg:col-span-2">
         <h2 className="font-display text-lg font-semibold">New transfer</h2>
         <p className="mono mt-0.5 text-[11px] uppercase tracking-[0.16em] text-ink/40">
-          Instant · R0.00 fee · settled atomically
+          Instant · R0.00 fee · find anyone by account number
         </p>
 
         <div className="mt-6 space-y-5">
@@ -229,7 +229,7 @@ export default function TransferForm({
                 <input
                   id="recipient"
                   className="input"
-                  placeholder="Search by name or email…"
+                  placeholder="Name, email, or account number…"
                   value={q}
                   onChange={(e) => setQ(e.target.value)}
                   autoComplete="off"

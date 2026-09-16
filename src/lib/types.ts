@@ -78,26 +78,22 @@ export interface AdminUserRow {
   role: Role;
   createdAt: string | Date;
   lastActivity: string | Date | null;
-  totalBalance: number;
   accounts: {
     id: string;
     type: AccountType;
     number: string;
-    balance: number;
-    creditLimit: number;
   }[];
 }
 
 export interface AdminStats {
   totalUsers: number;
   totalAccounts: number;
-  totalFunds: number;
-  volume30d: number;
   newUsers7d: number;
-  transfers30d: number;
+  ledgerEntries: number;
+  activeMandates: number;
 }
 
 export interface AdminDetail {
   user: AdminUserRow;
-  transactions: TxView[];
+  ledgerEntries: number;
 }

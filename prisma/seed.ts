@@ -56,72 +56,15 @@ export interface SeedUserSpec {
   mandates?: MandateSpec[];
 }
 
+/*
+ * By default this is EMPTY — the seed creates ONLY the administrator.
+ * Everyone else is expected to register through the website, and the
+ * admin console will show exactly who has signed up.
+ *
+ * Add entries here if you also want default users baked into the seed:
+ */
 const SEED_USERS: SeedUserSpec[] = [
-  {
-    name: 'Amara Okafor',
-    email: 'amara@demo.com',
-    password: 'demo1234',
-    ageDays: 22,
-    accounts: ['CHECKING', 'SAVINGS', 'CREDIT'],
-    openingDeposit: 4_945.0,
-    mandates: [
-      // Overdue by a few hours → autopilot settles it on her first login.
-      { merchant: 'Netflix', amount: 199, frequency: 'MONTHLY', dueInDays: -0.1 },
-      { merchant: 'Glo2 Gym', amount: 399, frequency: 'MONTHLY', dueInDays: 21 },
-    ],
-  },
-  {
-    name: 'Jonas Weber',
-    email: 'jonas@demo.com',
-    password: 'demo1234',
-    ageDays: 31,
-    accounts: ['CHECKING', 'SAVINGS'],
-    mandates: [
-      { merchant: 'Vodacom', amount: 350, frequency: 'MONTHLY', dueInDays: 9 },
-      { merchant: 'Netflix', amount: 199, frequency: 'MONTHLY', dueInDays: 4 },
-    ],
-  },
-  {
-    name: 'Priya Sharma',
-    email: 'priya@demo.com',
-    password: 'demo1234',
-    ageDays: 40,
-    accounts: ['CHECKING', 'SAVINGS', 'CREDIT'],
-    mandates: [{ merchant: 'Spotify', amount: 79, frequency: 'MONTHLY', dueInDays: 15 }],
-  },
-  {
-    name: 'Diego Ramírez',
-    email: 'diego@demo.com',
-    password: 'demo1234',
-    ageDays: 48,
-    accounts: ['CHECKING', 'SAVINGS'],
-    mandates: [{ merchant: 'Spotify', amount: 79, frequency: 'WEEKLY', dueInDays: 5 }],
-  },
-  {
-    name: 'Grace Chen',
-    email: 'grace@demo.com',
-    password: 'demo1234',
-    ageDays: 55,
-    accounts: ['CHECKING', 'SAVINGS', 'CREDIT'],
-    mandates: [{ merchant: 'Boxer Fibre', amount: 599, frequency: 'MONTHLY', dueInDays: 2 }],
-  },
-  {
-    name: 'Tom Becker',
-    email: 'tom@demo.com',
-    password: 'demo1234',
-    ageDays: 63,
-    accounts: ['CHECKING', 'SAVINGS'],
-    mandates: [{ merchant: 'MTN Airtime', amount: 250, frequency: 'WEEKLY', dueInDays: 3 }],
-  },
-  {
-    name: 'Lena Kowalski',
-    email: 'lena@demo.com',
-    password: 'demo1234',
-    ageDays: 71,
-    accounts: ['CHECKING', 'SAVINGS', 'CREDIT'],
-    mandates: [{ merchant: 'Netflix', amount: 199, frequency: 'MONTHLY', dueInDays: 11 }],
-  },
-  // ── Add your own default users here, e.g. ─────────────────────────────
+  // ── Optional default users, e.g. ───────────────────────────────────────
   // {
   //   name: 'Thabo Mokoena',
   //   email: 'thabo@example.com',
@@ -395,13 +338,17 @@ async function main() {
   console.log('  Administrator (seed-only):');
   console.log('    admin@meridian.com  /  admin1234');
   console.log('');
-  console.log('  Default users:');
-  for (const s of SEED_USERS) {
-    console.log(`    ${s.email.padEnd(24)} /  ${s.password}`);
+  if (SEED_USERS.length > 0) {
+    console.log('  Default users:');
+    for (const s of SEED_USERS) {
+      console.log(`    ${s.email.padEnd(24)} /  ${s.password}`);
+    }
+  } else {
+    console.log('  No default users — everyone else registers on the website.');
   }
   console.log('');
-  console.log('  Tip: edit SEED_USERS at the top of prisma/seed.ts to add');
-  console.log('  your own default users, then re-run `npx prisma db seed`.');
+  console.log('  Tip: add default users via the SEED_USERS block at the top of');
+  console.log('  prisma/seed.ts, then re-run `npx prisma db seed`.');
   console.log('');
 }
 

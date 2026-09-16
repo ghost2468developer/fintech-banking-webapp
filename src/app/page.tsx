@@ -25,12 +25,12 @@ const TICKER = [
 ];
 
 const FEED = [
-  { a: "Amara Okafor", b: "MDB-K4F2X9 · checking", amt: "924.55", sign: 1 as const },
-  { a: "Jonas Weber", b: "MDB-7QPLM3 · savings", amt: "200.00", sign: -1 as const },
-  { a: "Grace Chen", b: "MDB-9XDRT2 · checking", amt: "1,240.00", sign: 1 as const },
-  { a: "Priya Sharma", b: "MDB-2WVN8C · credit line", amt: "86.20", sign: -1 as const },
-  { a: "Diego Ramírez", b: "MDB-5HKBA1 · checking", amt: "350.75", sign: 1 as const },
-  { a: "Lena Kowalski", b: "MDB-8MCQD4 · checking", amt: "412.90", sign: -1 as const },
+  { a: "Member ••4821", b: "MDB-K4F2X9 · checking", amt: "924.55", sign: 1 as const },
+  { a: "Member ••9917", b: "MDB-7QPLM3 · savings", amt: "200.00", sign: -1 as const },
+  { a: "Member ••3305", b: "MDB-9XDRT2 · checking", amt: "1,240.00", sign: 1 as const },
+  { a: "Member ••7742", b: "MDB-2WVN8C · credit line", amt: "86.20", sign: -1 as const },
+  { a: "Member ••1158", b: "MDB-5HKBA1 · checking", amt: "350.75", sign: 1 as const },
+  { a: "Member ••6203", b: "MDB-8MCQD4 · checking", amt: "412.90", sign: -1 as const },
 ];
 
 const STEPS = [
@@ -43,8 +43,8 @@ const STEPS = [
   {
     n: "02",
     label: "Find someone",
-    title: "People, not account numbers",
-    body: "Search by name or email. Pick the person, pick their account, type the amount. The transfer settles instantly — row-locked, atomic, and fee-free in both directions.",
+    title: "Any member, by account number",
+    body: "Every account gets a unique 16-digit number. Search by name, email, or the number itself — pick the person, pick their account, type the amount. The transfer settles instantly: row-locked, atomic, fee-free.",
   },
   {
     n: "03",
@@ -156,7 +156,7 @@ export default async function LandingPage() {
               </Link>
             </div>
             <p className="mono mt-3 text-[11px] uppercase tracking-[0.16em] text-ink/40">
-              demo login · amara@demo.com / demo1234
+              R250 welcome credit · no credit check · 30 seconds
             </p>
 
             <div className="mt-12 grid max-w-lg grid-cols-3 gap-6 border-t border-ink/15 pt-6">

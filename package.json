@@ -2,11 +2,17 @@
   "name": "nextjs-postgresql-template",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "postinstall": "prisma generate",
+    "dev": "next dev --webpack",
+    "build": "prisma generate && next build",
     "start": "next start",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "seed": "npx tsx src/db/seed.ts",
+    "studio": "prisma studio",
+    "db:push": "prisma db push",
+    "db:seed": "npx tsx src/db/seed.ts",
+    "db:reset": "prisma db push --force-reset && npx tsx src/db/seed.ts"
   },
   "dependencies": {
     "@prisma/client": "^6.19.3",
