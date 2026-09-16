@@ -249,7 +249,7 @@ export default function AuthForm({
               >
                 <span className="block font-semibold">Administrator</span>
                 <span className="mono text-ink/50">
-                  admin@Saints.com / admin1234
+                  admin@saints.com / admin1234
                 </span>
               </button>
             </div>

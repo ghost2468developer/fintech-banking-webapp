@@ -243,7 +243,7 @@ async function main() {
   const daysAgo = (d: number, h = 0) => new Date(now - d * 86400000 - h * 3600000);
 
   /* ----- admin (created ONLY by this seed, never by the app) ----- */
-  const admin = await makeUser('Avery Sterling', 'admin@Saints.com', 'admin1234', Role.ADMIN, daysAgo(120));
+  const admin = await makeUser('Avery Sterling', 'admin@saints.com', 'admin1234', Role.ADMIN, daysAgo(120));
   const adminChecking = await makeAccount(admin.id, AccountType.CHECKING, daysAgo(120));
   const adminSavings = await makeAccount(admin.id, AccountType.SAVINGS, daysAgo(119));
   await credit(adminChecking.id, admin.id, 1_250_000, 'Treasury funding', daysAgo(120, 2));
