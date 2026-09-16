@@ -175,7 +175,7 @@ export default function DebitOrdersPanel({
             <IconRepeat className="mx-auto size-7 text-ink/25" />
             <p className="mt-3 font-display text-lg">No mandates yet</p>
             <p className="mx-auto mt-1 max-w-[280px] text-sm text-ink/50">
-              Accept a debit order and Meridian will settle it automatically
+              Accept a debit order and Saints will settle it automatically
               on schedule - Netflix, gyms, fibre, whatever you run.
             </p>
           </div>

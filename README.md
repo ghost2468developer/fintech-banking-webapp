@@ -1,6 +1,6 @@
-# Meridian Bank
+# Saints Bank
 
-Precision banking for people who count. Meridian is a full banking application:
+Precision banking for people who count. Saints is a full banking application:
 person-to-person transfers, three account types, merchant purchases, bill
 payments, autopilot debit orders-all settled on an immutable, row-locked
 ledger in PostgreSQL.
@@ -109,7 +109,7 @@ npx prisma db seed
 
 Seeding is configured in `prisma.config.ts` (`migrations.seed`) and is the
 **only way the administrator account exists**. By default the seed creates
-**only the admin** (Meridian Treasury, ~R1.96M across two accounts)-every
+**only the admin** (Saints Treasury, ~R1.96M across two accounts)-every
 other member is expected to **register through the website**, which is
 exactly who the admin console then shows.
 
@@ -231,7 +231,7 @@ npm run dev
 
 | Role | Email | Password | Source |
 |---|---|---|---|
-| **Administrator** | `admin@meridian.com` | `admin1234` | seed (the only account the seed creates) |
+| **Administrator** | `admin@Saints.com` | `admin1234` | seed (the only account the seed creates) |
 | Customer | *(you pick it)* | *(you pick it)* | register on the website |
 
 Customers sign themselves up at `/register`-that registration is what
@@ -267,7 +267,7 @@ balances.
 ### Authentication
 - Login/register hash passwords with bcrypt (10 rounds) and sign an HS256 JWT
   (`jose`) carrying `sub`, `role`, `email`-7-day expiry.
-- The JWT lives in an `httpOnly`, `SameSite=Lax` cookie (`meridian_session`).
+- The JWT lives in an `httpOnly`, `SameSite=Lax` cookie (`Saints_session`).
 - Server components gate `/app` (any user) and `/admin` (ADMIN only); every
   API route re-verifies the session, and admin routes re-check the role.
 

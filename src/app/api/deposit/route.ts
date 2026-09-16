@@ -40,7 +40,7 @@ export async function POST(req: Request) {
           kind: "CREDIT",
           amount,
           note: note ?? "External deposit",
-          counterparty: "Meridian Bank",
+          counterparty: "Saints Bank",
           toAccountId: account.id,
           receiverId: user.id,
         },

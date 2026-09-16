@@ -3,10 +3,10 @@ import { cookies } from "next/headers";
 import { prisma } from "@/lib/prisma";
 import type { PublicUser } from "@/lib/types";
 
-export const SESSION_COOKIE = "meridian_session";
+export const SESSION_COOKIE = "Saints_session";
 
 const secret = new TextEncoder().encode(
-  process.env.AUTH_SECRET || "meridian-dev-secret-rotate-me"
+  process.env.AUTH_SECRET || "Saints-dev-secret-rotate-me"
 );
 
 export async function signSession(user: {

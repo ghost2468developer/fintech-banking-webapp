@@ -49,7 +49,7 @@ export function TxRow({ t }: { t: TxView }) {
         : "border-limedeep/40 bg-lime/40 text-[#5f8a12]";
 
   const name = isCredit
-    ? t.counterparty?.name ?? "Meridian Bank"
+    ? t.counterparty?.name ?? "Saints Bank"
     : t.counterparty?.name ?? "—";
   const sub = t.note ?? KIND_LABEL[t.kind] ?? "Transaction";
 

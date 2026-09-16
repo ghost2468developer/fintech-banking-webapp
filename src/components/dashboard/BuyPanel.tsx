@@ -278,7 +278,7 @@ export default function BuyPanel({
             <p className="mt-3 font-display text-lg">Pick a merchant</p>
             <p className="mt-1 max-w-[220px] text-sm text-ink/50">
               Groceries, airtime, fashion, electronics - charged straight from
-              your Meridian account.
+              your Saints account.
             </p>
           </div>
         )}

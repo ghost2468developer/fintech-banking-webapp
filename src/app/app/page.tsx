@@ -4,7 +4,7 @@ import Dashboard from "@/components/dashboard/Dashboard";
 
 export const dynamic = "force-dynamic";
 
-export const metadata = { title: "Dashboard Meridian Bank" };
+export const metadata = { title: "Dashboard Saints Bank" };
 
 export default async function AppPage() {
   const user = await getSessionUser();

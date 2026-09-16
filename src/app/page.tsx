@@ -80,7 +80,7 @@ export default async function LandingPage() {
           <Link href="/" className="flex items-center gap-2.5">
             <LogoMark className="size-7 text-ink" />
             <span className="font-display text-lg font-semibold tracking-tight">
-              Meridian
+              Saints
             </span>
             <span className="mono -ml-1.5 text-[10px] uppercase tracking-[0.3em] text-ink/45">
               Bank
@@ -130,7 +130,7 @@ export default async function LandingPage() {
           <div className="lg:col-span-7">
             <p className="eyebrow mb-5 flex items-center gap-2 text-ink/50">
               <span className="inline-block size-1.5 rounded-full bg-limedeep" />
-              Meridian Bank · person-to-person ledger
+              Saints Bank · person-to-person ledger
             </p>
             <h1 className="font-display text-[2.9rem] font-semibold leading-[1.02] tracking-tight sm:text-6xl lg:text-[4.4rem]">
               Every cent,
@@ -141,7 +141,7 @@ export default async function LandingPage() {
               <span className="ml-1 inline-block h-[0.85em] w-[3px] translate-y-[0.1em] bg-limedeep" />
             </h1>
             <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-ink/65">
-              Meridian is a bank built for the whole job: person-to-person
+              Saints is a bank built for the whole job: person-to-person
               transfers, buying from 12 partners, paying Eskom to Netflix, and
               debit orders that run themselves, all on three account types and
               an immutable, row-locked ledger behind every single line.
@@ -284,7 +284,7 @@ export default async function LandingPage() {
                   Daily money, moving fast.
                 </h3>
                 <p className="mt-3 max-w-md text-[15px] leading-relaxed text-ink/65">
-                  Your default account. Send and receive from any Meridian
+                  Your default account. Send and receive from any Saints
                   member instantly, sweep to savings whenever you like, and
                   watch every balance update in real time.
                 </p>
@@ -364,7 +364,7 @@ export default async function LandingPage() {
               not a spreadsheet.
             </h2>
             <p className="mt-5 max-w-md text-[15px] leading-relaxed text-cream/60">
-              Anyone can draw a balance. Meridian's balances are provable —
+              Anyone can draw a balance. Saints's balances are provable —
               every transfer is one atomic Postgres transaction against
               row-level locks, so concurrent overdrafts simply cannot happen.
             </p>
@@ -389,12 +389,12 @@ export default async function LandingPage() {
                 <span className="size-2.5 rounded-full bg-amber/70" />
                 <span className="size-2.5 rounded-full bg-lime/80" />
                 <span className="mono ml-3 text-[10px] uppercase tracking-[0.2em] text-cream/35">
-                  meridian - settlement
+                  Saints - settlement
                 </span>
               </div>
               <div className="mono space-y-2 text-[13px] leading-relaxed">
                 <p className="text-cream/90">
-                  <span className="text-lime">$</span> meridian send 924.55
+                  <span className="text-lime">$</span> Saints send 924.55
                   amara@demo.com
                 </p>
                 <p className="text-cream/45">→ locking account rows…</p>
@@ -441,7 +441,7 @@ export default async function LandingPage() {
               <div className="flex items-center gap-2.5 text-cream">
                 <LogoMark className="size-7 text-lime" />
                 <span className="font-display text-lg font-semibold tracking-tight">
-                  Meridian
+                  Saints
                 </span>
                 <span className="mono text-[10px] uppercase tracking-[0.3em] text-cream/45">
                   Bank
@@ -501,14 +501,14 @@ export default async function LandingPage() {
                 Fine print
               </p>
               <p className="mt-4 text-[13px] leading-relaxed">
-                Meridian is a demonstration build. It is not a real bank,
+                Saints is a demonstration build. It is not a real bank,
                 offers no real deposits, and is not FDIC insured. Balances are
                 for demonstration purposes only.
               </p>
             </div>
           </div>
           <div className="mt-12 flex flex-col justify-between gap-3 border-t border-white/10 pt-6 text-[12px] md:flex-row">
-            <p>© 2026 Meridian Bank - a demonstration build.</p>
+            <p>© 2026 Saints Bank - a demonstration build.</p>
             <p className="mono uppercase tracking-[0.16em] text-cream/35">
               Seeded with Postgres + Prisma
             </p>

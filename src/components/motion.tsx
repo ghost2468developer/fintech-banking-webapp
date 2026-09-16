@@ -145,7 +145,7 @@ export function Scramble({
       setOut(text);
       return;
     }
-    const chars = "MERIDIANR#%&0123456789";
+    const chars = "SaintsR#%&0123456789";
     let frame = 0;
     let raf = 0;
     const total = Math.max(20, Math.round(text.length * 2.1));

@@ -126,7 +126,7 @@ export default function AdminConsole({ user }: { user: PublicUser }) {
           <div className="flex items-center gap-3">
             <LogoMark className="size-6 text-lime" />
             <span className="font-display text-lg font-semibold tracking-tight">
-              Meridian
+              Saints
             </span>
             <span className="mono text-[10px] uppercase tracking-[0.3em] text-cream/40">
               Admin console

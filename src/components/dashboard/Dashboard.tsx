@@ -195,7 +195,7 @@ export default function Dashboard({ user }: { user: PublicUser }) {
         <Link href="/app" className="flex items-center gap-2.5 px-5 pb-6 pt-6">
           <LogoMark className="size-7 text-lime" />
           <span className="font-display text-lg font-semibold tracking-tight">
-            Meridian
+            Saints
           </span>
           <span className="mono text-[10px] uppercase tracking-[0.3em] text-cream/40">
             Bank
@@ -266,7 +266,7 @@ export default function Dashboard({ user }: { user: PublicUser }) {
             <Link href="/app" className="flex items-center gap-2">
               <LogoMark className="size-6 text-ink" />
               <span className="font-display font-semibold tracking-tight">
-                Meridian
+                Saints
               </span>
             </Link>
             <div className="flex items-center gap-2">

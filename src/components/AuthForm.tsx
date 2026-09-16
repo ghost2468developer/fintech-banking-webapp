@@ -67,7 +67,7 @@ export default function AuthForm({
         <Link href="/" className="relative flex items-center gap-2.5">
           <LogoMark className="size-7 text-lime" />
           <span className="font-display text-lg font-semibold tracking-tight">
-            Meridian
+            Saints
           </span>
           <span className="mono text-[10px] uppercase tracking-[0.3em] text-cream/45">
             Bank
@@ -103,7 +103,7 @@ export default function AuthForm({
             href="/"
             className="mono mb-8 inline-block text-[11px] uppercase tracking-[0.2em] text-ink/45 transition-colors hover:text-ink"
           >
-            ← Back to meridian
+            ← Back to Saints
           </Link>
           <h1 className="font-display text-4xl font-semibold tracking-tight">
             {isLogin ? "Welcome back." : "Open your ledger."}
@@ -219,7 +219,7 @@ export default function AuthForm({
           <p className="mt-6 text-center text-sm text-ink/55">
             {isLogin ? (
               <>
-                New to Meridian?{" "}
+                New to Saints?{" "}
                 <Link href="/register" className="font-semibold text-ink underline decoration-limedeep decoration-2 underline-offset-4 hover:decoration-ink">
                   Open an account
                 </Link>
@@ -242,14 +242,14 @@ export default function AuthForm({
               <button
                 type="button"
                 onClick={() => {
-                  setEmail("admin@meridian.com");
+                  setEmail("admin@Saints.com");
                   setPassword("admin1234");
                 }}
                 className="mt-3 w-full rounded-md border border-ink/20 bg-white px-3 py-2 text-left text-[12px] transition-colors hover:border-ink"
               >
                 <span className="block font-semibold">Administrator</span>
                 <span className="mono text-ink/50">
-                  admin@meridian.com / admin1234
+                  admin@Saints.com / admin1234
                 </span>
               </button>
             </div>

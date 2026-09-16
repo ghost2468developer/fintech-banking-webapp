@@ -4,7 +4,7 @@ import AuthForm from "@/components/AuthForm";
 
 export const dynamic = "force-dynamic";
 
-export const metadata = { title: "Open an account Meridian Bank" };
+export const metadata = { title: "Open an account Saints Bank" };
 
 export default async function RegisterPage() {
   const user = await getSessionUser();

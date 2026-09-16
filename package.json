@@ -8,11 +8,11 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "seed": "npx tsx src/db/seed.ts",
+    "seed": "tsx prisma/seed.ts",
     "studio": "prisma studio",
     "db:push": "prisma db push",
-    "db:seed": "npx tsx src/db/seed.ts",
-    "db:reset": "prisma db push --force-reset && npx tsx src/db/seed.ts"
+    "db:seed": "tsx prisma/seed.ts",
+    "db:reset": "prisma db push --force-reset && tsx prisma/seed.ts"
   },
   "dependencies": {
     "@prisma/client": "^6.19.3",

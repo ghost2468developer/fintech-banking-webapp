@@ -1,5 +1,5 @@
 /*
- * Meridian Bank - database seed.
+ * Saints Bank - database seed.
  *  Run with:  npx prisma db seed
  *
  * ────────────────────────────────────────────────────────────────────────
@@ -12,7 +12,7 @@
  *  mandates) and rebuilds from this file. It also invalidates existing
  *  sessions, so anyone signed in must log in again.
  *
- *  The administrator (admin@meridian.com) is created separately, right
+ *  The administrator (admin@Saints.com) is created separately, right
  *  below the array - it exists ONLY because this seed creates it.
  *  Registration in the app can never create an admin.
  * ────────────────────────────────────────────────────────────────────────
@@ -243,7 +243,7 @@ async function main() {
   const daysAgo = (d: number, h = 0) => new Date(now - d * 86400000 - h * 3600000);
 
   /* ----- admin (created ONLY by this seed, never by the app) ----- */
-  const admin = await makeUser('Avery Sterling', 'admin@meridian.com', 'admin1234', Role.ADMIN, daysAgo(120));
+  const admin = await makeUser('Avery Sterling', 'admin@Saints.com', 'admin1234', Role.ADMIN, daysAgo(120));
   const adminChecking = await makeAccount(admin.id, AccountType.CHECKING, daysAgo(120));
   const adminSavings = await makeAccount(admin.id, AccountType.SAVINGS, daysAgo(119));
   await credit(adminChecking.id, admin.id, 1_250_000, 'Treasury funding', daysAgo(120, 2));
@@ -330,13 +330,13 @@ async function main() {
   ]);
 
   console.log('');
-  console.log('✓ Meridian Bank seeded');
+  console.log('✓ Saints Bank seeded');
   console.log(
     `  ${users} users · ${accounts} accounts · ${txns} ledger entries · ${dos} debit orders`
   );
   console.log('');
   console.log('  Administrator (seed-only):');
-  console.log('    admin@meridian.com  /  admin1234');
+  console.log('    admin@Saints.com  /  admin1234');
   console.log('');
   if (SEED_USERS.length > 0) {
     console.log('  Default users:');

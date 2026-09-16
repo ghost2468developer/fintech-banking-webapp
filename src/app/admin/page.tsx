@@ -4,7 +4,7 @@ import AdminConsole from "@/components/admin/AdminConsole";
 
 export const dynamic = "force-dynamic";
 
-export const metadata = { title: "Admin console: Meridian Bank" };
+export const metadata = { title: "Admin console: Saints Bank" };
 
 export default async function AdminPage() {
   const user = await getSessionUser();
