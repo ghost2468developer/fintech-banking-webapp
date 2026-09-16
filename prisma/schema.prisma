@@ -1,0 +1,115 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  CUSTOMER
+}
+
+enum AccountType {
+  CHECKING
+  SAVINGS
+  CREDIT
+}
+
+enum TransactionKind {
+  TRANSFER
+  CREDIT
+  PURCHASE
+  BILL
+  DEBIT_ORDER
+}
+
+enum Frequency {
+  WEEKLY
+  MONTHLY
+}
+
+enum DebitOrderStatus {
+  ACTIVE
+  PAUSED
+  CANCELLED
+}
+
+model User {
+  id           String        @id @default(cuid())
+  email        String        @unique
+  name         String
+  passwordHash String
+  role         Role          @default(CUSTOMER)
+  createdAt    DateTime      @default(now())
+  accounts     Account[]
+  sent         Transaction[] @relation("Sender")
+  received     Transaction[] @relation("Receiver")
+  debitOrders  DebitOrder[]
+
+  @@map("users")
+}
+
+model Account {
+  id             String          @id @default(cuid())
+  number         String          @unique
+  type           AccountType
+  creditLimit    Decimal         @default(0) @db.Decimal(15, 2)
+  balance        Decimal         @default(0) @db.Decimal(15, 2)
+  userId         String
+  user           User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt      DateTime        @default(now())
+  sentTxns       Transaction[]   @relation("SenderAccount")
+  receivedTxns   Transaction[]   @relation("ReceiverAccount")
+  debitOrders    DebitOrder[]
+
+  @@map("accounts")
+}
+
+model Transaction {
+  id              String          @id @default(cuid())
+  reference       String          @unique
+  kind            TransactionKind @default(TRANSFER)
+  amount          Decimal         @db.Decimal(15, 2)
+  note            String?
+  counterparty    String?
+  fromAccountId   String?
+  fromAccount     Account?        @relation("SenderAccount", fields: [fromAccountId], references: [id])
+  toAccountId     String?
+  toAccount       Account?        @relation("ReceiverAccount", fields: [toAccountId], references: [id])
+  senderId        String?
+  sender          User?           @relation("Sender", fields: [senderId], references: [id])
+  receiverId      String?
+  receiver        User?           @relation("Receiver", fields: [receiverId], references: [id])
+  debitOrderId    String?
+  debitOrder      DebitOrder?     @relation(fields: [debitOrderId], references: [id], onDelete: SetNull)
+  createdAt       DateTime        @default(now())
+
+  @@index([debitOrderId])
+  @@index([fromAccountId])
+  @@index([toAccountId])
+  @@index([senderId])
+  @@index([receiverId])
+  @@index([createdAt])
+  @@map("transactions")
+}
+
+model DebitOrder {
+  id            String           @id @default(cuid())
+  userId        String
+  user          User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  merchant      String
+  amount        Decimal          @db.Decimal(15, 2)
+  frequency     Frequency        @default(MONTHLY)
+  nextRun       DateTime
+  status        DebitOrderStatus @default(ACTIVE)
+  fromAccountId String
+  fromAccount   Account          @relation(fields: [fromAccountId], references: [id], onDelete: Cascade)
+  createdAt     DateTime         @default(now())
+  runs          Transaction[]
+
+  @@index([userId, status, nextRun])
+  @@map("debit_orders")
+}
